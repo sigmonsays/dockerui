@@ -98,7 +98,6 @@
             <i class="icon-refresh" style="width:32px;height:32px;" ng-click="getChanges()"></i>
         </div>
     </div> 
-
     <div class="well well-large">
         <ul>
             <li ng-repeat="change in changes | filter:hasContent">
@@ -106,6 +105,17 @@
             </li>
         </ul>
     </div>
+
+    <div class="row-fluid">
+        <div class="span1">
+            Logs:
+        </div>
+        <div class="span5">
+            <i class="icon-refresh" style="width:32px;height:32px;" ng-click="getLogs()"></i>
+        </div>
+    </div> 
+    <pre><div ng-repeat="line in logs track by $index | filter:hasContent">{{ line }}</div></pre>
+      
 
     <hr />
 

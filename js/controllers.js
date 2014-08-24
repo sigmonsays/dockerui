@@ -154,6 +154,7 @@ function SettingsController($scope, System, Docker, Settings, Messages) {
 // Controls the page that displays a single container and actions on that container.
 function ContainerController($scope, $routeParams, $location, Container, Messages, ViewSpinner) {
     $scope.changes = [];
+    $scope.logs = [];
 
     $scope.start = function(){
         Container.start({id: $routeParams.id}, function(d) {
@@ -197,6 +198,17 @@ function ContainerController($scope, $routeParams, $location, Container, Message
         });
     };
 
+    $scope.getLogs = function() {
+        Container.logs({id: $routeParams.id}, function(d) {
+            var l = Object.keys(d).map(function(key) {
+              return d[key];
+            });
+            $scope.logs=l.join('').split("\n").map(function(line, index) {
+              return line.substr(8);
+            });
+        });
+    };
+
     Container.get({id: $routeParams.id}, function(d) {
         $scope.container = d;
     }, function(e) {
@@ -209,6 +221,7 @@ function ContainerController($scope, $routeParams, $location, Container, Message
     });
 
    $scope.getChanges();
+   $scope.getLogs();
 }
 
 // Controller for the list of containers
