@@ -17,7 +17,7 @@ angular.module('dockerui.services', ['ngResource'])
             logs: {
                method: 'GET',
                isArray: false,
-               params: { action:'logs', stderr:true, stdout:true, tail:3},
+               params: { action:'logs', stderr:true, stdout:true, tail:3, timestamps: true},
             },
             create :{method: 'POST', params: {action:'create'}},
             remove :{method: 'DELETE', params: {id: '@id', v:0}}
